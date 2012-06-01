@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/riskEstimator/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="riskEstimator" targetNamespace="http://www.example.org/riskEstimator/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:risk="http://www.websigni.org/piglets/riskEstimator/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="riskEstimator" targetNamespace="http://www.websigni.org/piglets/riskEstimator/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://www.example.org/riskEstimator/">
-      <xsd:element name="NewOperation">
+    <xsd:schema targetNamespace="http://www.websigni.org/piglets/riskEstimator/" xmlns:risk="http://www.websigni.org/piglets/riskEstimator/">
+      <xsd:element name="RiskEstimationRequest">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="in" type="xsd:string"/>
+          	<xsd:element name="name" type="xsd:string" />
+          	<xsd:element name="surname" type="xsd:string"></xsd:element>
+          	<xsd:element name="age" type="xsd:int"></xsd:element>
+
+          	<xsd:element name="nationality" type="xsd:string"></xsd:element>
+          	<xsd:element name="familyStatus" type="xsd:string"></xsd:element>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="NewOperationResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="out" type="xsd:string"/>
-          </xsd:sequence>
-        </xsd:complexType>
+      <xsd:element name="RiskEstimationResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="riskPoints" type="xsd:int" />
+      			<xsd:element name="riskLevel" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
       </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="NewOperationRequest">
-    <wsdl:part element="tns:NewOperation" name="parameters"/>
+  <wsdl:message name="EstimateRiskRequest">
+    <wsdl:part element="risk:RiskEstimationRequest" name="parameters"/>
   </wsdl:message>
-  <wsdl:message name="NewOperationResponse">
-    <wsdl:part element="tns:NewOperationResponse" name="parameters"/>
+  <wsdl:message name="EstimateRiskResponse">
+    <wsdl:part element="risk:RiskEstimationResponse" name="parameters"/>
   </wsdl:message>
   <wsdl:portType name="riskEstimator">
-    <wsdl:operation name="NewOperation">
-      <wsdl:input message="tns:NewOperationRequest"/>
-      <wsdl:output message="tns:NewOperationResponse"/>
+    <wsdl:operation name="EstimateRisk">
+      <wsdl:input message="risk:EstimateRiskRequest"/>
+      <wsdl:output message="risk:EstimateRiskResponse"/>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="riskEstimatorSOAP" type="tns:riskEstimator">
+  <wsdl:binding name="riskEstimatorSOAP" type="risk:riskEstimator">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="NewOperation">
-      <soap:operation soapAction="http://www.example.org/riskEstimator/NewOperation"/>
+    <wsdl:operation name="EstimateRisk">
+      <soap:operation soapAction="http://localhost:9999/EstimateRisk"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -43,8 +49,8 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="riskEstimator">
-    <wsdl:port binding="tns:riskEstimatorSOAP" name="riskEstimatorSOAP">
-      <soap:address location="http://www.example.org/"/>
+    <wsdl:port binding="risk:riskEstimatorSOAP" name="riskEstimatorSOAP">
+      <soap:address location="http://localhost:9999"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
