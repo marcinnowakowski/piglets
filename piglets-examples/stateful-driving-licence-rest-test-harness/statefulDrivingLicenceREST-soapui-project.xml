@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="drivingLicence" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="drivingLicence" type="rest" basePath="/piglets/statefuldrivinglicence/rest/api" definitionUrl="file:/C:/piglets/source/piglets-examples/statefull-driving-licence/src/main/resources/org/websigni/piglets/statefuldrivinglicence/wadl/drivingLicence.wadl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://websigni.com</con:endpoint><con:endpoint>http://localhost:8080</con:endpoint></con:endpoints><con:resource name="applicants" path="applicants"><con:settings/><con:parameters/><con:resource name="{applicantId}" path="{applicantId}"><con:settings/><con:parameters><con:parameter required="true"><con:name>applicantId</con:name><con:value xsi:nil="true"/><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default xsi:nil="true"/></con:parameter></con:parameters><con:method name="GET" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE" id=""><con:mediaType>application/xml</con:mediaType><con:params/><con:element xsi:nil="true"/><con:description xsi:nil="true"/></con:representation><con:request name="GET_ITEM_15" mediaType="application/xml" accept="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="applicantId" value="15" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request><con:request name="GET_ITEM_3" mediaType="application/xml" accept="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="applicantId" value="3" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="DELETE" method="DELETE"><con:settings/><con:parameters/><con:representation type="RESPONSE" id=""><con:mediaType>application/xml</con:mediaType><con:params/><con:element xsi:nil="true"/><con:description xsi:nil="true"/></con:representation><con:request name="DELETE_ITEM_15" mediaType="application/xml"><con:settings/><con:endpoint>http://websigni.com</con:endpoint><con:request/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="DELETE_ITEM_10" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="applicantId" value="10" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="PUT" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST" id=""><con:mediaType>application/xml</con:mediaType><con:params/><con:element xsi:nil="true"/><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/xml</con:mediaType><con:params/><con:element xsi:nil="true"/><con:description xsi:nil="true"/></con:representation><con:request name="PUT_ITEM_15" mediaType="application/xml" postQueryString="false" accept="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="applicantId" value="15" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="POST" method="POST"><con:settings/><con:parameters/><con:request name="POST_ITEM_15" mediaType="application/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>&lt;applicant>
+ &lt;age>11&lt;/age>
+&lt;/applicant></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="applicantId" value="15" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:method name="GET" method="GET"><con:settings/><con:parameters/><con:request name="GET_COLLECTION" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:mockService port="8080" path="/" host="WN7X64-3NNHM4J" name="drivingLicenceMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:startScript>log.info "Starting drivingLicenceMockService"</con:startScript><con:stopScript>log.info "Stopping drivingLicenceMockService"</con:stopScript><con:properties/><con:onRequestScript>import com.eviware.soapui.impl.wsdl.mock.WsdlMockResult
+import java.io.StringWriter;
+
+import org.apache.commons.io.IOUtils
+
+// extract http method
+method = mockRequest.httpRequest.method
+log.info "Received request using http method: " + method
+log.info "Context path: " + mockRequest.httpRequest.contextPath
+
+// extract request uri 
+requestURI = mockRequest.httpRequest.requestURI
+log.info "Reqeust URI: " + requestURI
+
+def requestURIMatcher = requestURI =~ /\/piglets\/statefuldrivinglicence\/rest\/api\/(.*)/
+if (!requestURIMatcher) {
+	// other requests are not supported
+	mockRequest.httpResponse.writer &lt;&lt; "Not Found"
+	mockRequest.httpResponse.status = 404
+} else {
+	// extract command scope
+	def apiURI = requestURIMatcher[0][1]
+	def scope = "COLLECTION"
+	def itemId
+
+	log.info "apiURI: $apiURI, scope: $scope, itemId: $itemId"
+	apiURIMatcher = apiURI =~ /(.*)\/(.*)/
+	if( apiURIMatcher ) {
+		// uri need to be trimmed from ending slash
+		apiURI = apiURIMatcher[0][1]
+		if( apiURIMatcher[0][2]) {
+			scope = "ITEM"
+			itemId = apiURIMatcher[0][2]
+		}
+	}
+
+	log.info "apiURI: $apiURI, scope: $scope, itemId: $itemId"
+	
+	// extract request content 
+	def contentString = ""
+	
+	// Note 1: post method is dispatched differently by SOAPUI as other methods
+	// @see: implementation of
+	// com.eviware.soapui.impl.wsdl.mock.WsdlMockRunner
+	// public MockResult dispatchRequest( HttpServletRequest request, HttpServletResponse response )
+	if (mockRequest.httpRequest.method == "POST") {
+		contentString = mockRequest.getRequestContent()
+	} else {
+		def requestWriter = new StringWriter()
+		IOUtils.copy(mockRequest.getHttpRequest().getReader(), requestWriter)
+		contentString = requestWriter.toString()
+	}
+
+	log.info "Reqeust content: " + contentString
+}
+
+// Note 2: when "new WsdlMockResult()" is called for POST dispatch method normally implemented in operation is called
+// for rest service operation doesn't exist, how ever response is dispatched and cannot be modified after call of  "new WsdlMockResult()"
+
+// Note 3: 'dispatch error; missing response' is generated because operation could not be found for rest service.
+WsdlMockResult mockResult = new WsdlMockResult( mockRequest )
+
+return mockResult
+
+</con:onRequestScript><con:afterRequestScript>log.info "Response was sent"</con:afterRequestScript></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
