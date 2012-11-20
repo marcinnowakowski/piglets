@@ -57,7 +57,7 @@ public class StatefulDrivingLicenceRestService {
 		// create applicant
 		Applicant applicant = new Applicant();
 		applicant.setIdentificationNumber("000001");
-		applicant.setAge(27);
+		applicant.setAge(19);
 		
 		// create applicant REST request
 		RestCommand request = new RestCommand();
@@ -71,6 +71,29 @@ public class StatefulDrivingLicenceRestService {
 		
 		// perform submission
 		RestCommandResponse response 
+			= drivingLicenceRestService.executeRestCommand(request);
+		
+		// present result
+		System.out.println("Response: " + response);
+		
+		//--------------- CASE 1.1 ----------------//
+		// create applicant
+		applicant = new Applicant();
+		applicant.setIdentificationNumber("000013");
+		applicant.setAge(33);
+		
+		// create applicant REST request
+		request = new RestCommand();
+		request.setContext("applicants");
+		request.setHttpCommandType(HttpCommandTypeEnum.PUT);
+		request.setCommandScope(CommandScopeEnum.ITEM);
+		request.setId(applicant.getIdentificationNumber());
+		request.setContent(applicant);
+		
+		System.out.println("Request: " + request);
+		
+		// perform submission
+		response 
 			= drivingLicenceRestService.executeRestCommand(request);
 		
 		// present result
