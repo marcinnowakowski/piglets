@@ -51,16 +51,24 @@ rule "applicants/, DELETE, ITEM API"
 salience 100
 when
     $request : 
-    	RestCommand( httpCommandType == HttpCommandTypeEnum.DELETE )
-    		and
-    	RestCommand( commandScope == CommandScopeEnum.ITEM )
-    		and
-    	RestCommand( context == "applicants" )
+    	RestCommand( 
+    		httpCommandType == HttpCommandTypeEnum.DELETE,
+    		commandScope == CommandScopeEnum.ITEM,
+    		context == "applicants",
+    		$id : id
+    	)
     $response : RestCommandResponse()
     $applicantStore : ApplicantStore()
 then
+
+    modify( $response ) {
+    	setResponseContent( new SubmissionResult() )
+   	}
+
+    ApplicantDelete $applicantDelete = new ApplicantDelete();
+    $applicantDelete.setIdentificationNumber( $id );
     
-    insert ( (ApplicantDelete) $request.getContent() );
+    insert ( $applicantDelete );
     insert ( (SubmissionResult) $response.getResponseContent() );
     
     retract ($request)

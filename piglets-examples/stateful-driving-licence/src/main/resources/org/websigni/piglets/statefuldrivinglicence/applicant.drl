@@ -103,9 +103,9 @@ rule "Delete applicant not possible, applicant doesn't exits"
 salience 200
 when
 	$applicantDelete : ApplicantDelete( $id : identificationNumber )
-	$applicationStore : 
-		ApplicationStore( 
-			!applicationMap.containsKey( $id ) )
+	$applicantStore : 
+		ApplicantStore( 
+			!applicantMap.containsKey( $id ) )
     $result : SubmissionResult()
 then
 
@@ -144,10 +144,9 @@ end
 rule "Valid delete applicant"
 when
 	$applicantDelete : ApplicantDelete( $id : identificationNumber )
-	$applicationStore : 
-		ApplicationStore( 
-			applicationMap.containsKey( $id ) )
-	$applicantStore : ApplicantStore()
+	$applicantStore : 
+		ApplicantStore(  
+			applicantMap.containsKey( $id ) )
     $result : SubmissionResult()
 then
 
