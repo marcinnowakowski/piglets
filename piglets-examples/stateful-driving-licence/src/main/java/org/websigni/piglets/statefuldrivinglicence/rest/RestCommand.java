@@ -11,6 +11,26 @@ public class RestCommand {
 	private String id;
 	private Object content;
 	
+	// CONSTRUCTORS
+	public RestCommand(){}
+	
+	public RestCommand(String context, String method, String commandScope) {
+		this(context, method, commandScope, null);
+	}
+	
+	public RestCommand(String context, String method, String commandScope, String id) {
+		this(context, method, commandScope, id, null);
+	}
+	
+	public RestCommand(String context, String method, String commandScope, String id, Object content) {
+		
+		this.context = context;
+		this.httpCommandType = HttpCommandTypeEnum.valueOf(method);
+		this.commandScope = CommandScopeEnum.valueOf(commandScope);
+		this.id = id;
+		this.content = content;
+	}
+	
 	// GETTERS AND SETTERS
 	public HttpCommandTypeEnum getHttpCommandType() {
 		return httpCommandType;
