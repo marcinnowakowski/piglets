@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.websigni.piglets</groupId>
+    <artifactId>piglets-all</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>stateful-driving-licence</artifactId>
+  <name>stateful-driving-licence</name>
+  <description>Example of expert system validating driving licence application using stateful rules.
+    RESTful API was implemented attached to application was implemented also with rules.
+	Initial idea for application stateless driving licence and stateful fire alarm applications:
+		http://docs.jboss.org/drools/release/5.5.0.Final/drools-expert-docs/html_single/#d0e590, 
+		http://docs.jboss.org/drools/release/5.5.0.Final/drools-expert-docs/html_single/#d0e737
+	Rules patters are besed on wumpus world drools example:
+		http://docs.jboss.org/drools/release/5.5.0.Final/drools-expert-docs/html_single/#d0e11448
+  </description>
+  
+  <dependencies>
+	<dependency>
+		<groupId>commons-lang</groupId>
+		<artifactId>commons-lang</artifactId>
+		<version>2.4</version>
+		<scope>provided</scope>
+	</dependency>
+    <dependency>
+      <groupId>org.apache.xmlbeans</groupId>
+      <artifactId>xmlbeans</artifactId>
+      <version>2.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+		<plugin>
+	    <groupId>org.codehaus.mojo</groupId>
+	    <artifactId>xmlbeans-maven-plugin</artifactId>
+	    <version>2.3.3</version>
+	    <executions>
+	       <execution>
+	          <goals>
+	             <goal>xmlbeans</goal>
+	          </goals>
+	       </execution>
+	    </executions>
+	    <inherited>true</inherited>
+	    <configuration>
+	       <schemaDirectory>src/main/resources/org/websigni/piglets/statefuldrivinglicence/xsd</schemaDirectory>
+	    </configuration>
+	  </plugin>
+  	</plugins>
+  </build>
+</project>

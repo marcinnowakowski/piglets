@@ -1,0 +1,28 @@
+<application xmlns="http://wadl.dev.java.net/2009/02">
+	<resources base="http://websigni.com/piglets/statefuldrivinglicence/rest/api">
+		<resource path="applicants">
+			<!-- <method name="GET" /> -->
+			<resource path="{applicantId}">
+				<param required="true" style="template" name="applicantId" />
+				<method name="GET" >
+					<response>
+                        <representation mediaType="application/xml"/>
+                    </response>
+				</method>
+				<method name="DELETE">
+					<response>
+                        <representation mediaType="application/xml"/>
+                    </response>
+				</method>
+				<method name="PUT">
+					<request>
+                        <representation mediaType="application/xml"/>
+                    </request>
+					<response>
+                        <representation mediaType="application/xml"/>
+                    </response>
+				</method>
+			</resource>
+		</resource>
+	</resources>
+</application>

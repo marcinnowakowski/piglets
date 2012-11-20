@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.websigni.org/statefuldrivinglicence/xmlbeans" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:drlc="http://www.websigni.org/statefuldrivinglicence/xmlbeans">
+
+    <complexType name="applicantType">
+    	<sequence>
+    		<element name="identificationNumber" type="string"></element>
+    		<element name="age" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="submissionResultType">
+    	<choice>
+    		<element name="applicant" type="drlc:applicantType"></element>
+    		<element name="accepted" type="boolean"></element>
+    		<element name="decissionDescription" type="string" maxOccurs="unbounded" minOccurs="1"></element>
+    	</choice>
+    </complexType>
+
+    <element name="applicant" type="drlc:applicantType"></element>
+
+    <element name="submissionResult" type="drlc:submissionResultType"></element>
+</schema>

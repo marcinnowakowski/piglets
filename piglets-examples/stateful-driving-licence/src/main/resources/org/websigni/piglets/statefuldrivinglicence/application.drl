@@ -1,0 +1,91 @@
+package org.websigni.piglets.statefuldrivinglicence;
+
+import java.text.SimpleDateFormat;
+
+rule "Application submission date invalid"
+salience 200
+when
+    $application : Application( 
+    	submissionDate < (new SimpleDateFormat("dd MMM yyyy")).parse("01 jan 2012") 
+    	|| submissionDate == nil 
+    )
+    $result : SubmissionResult()
+then
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    	 	.add("Submission date invalid, should be submissnionDate >= 01-jan-2012, is: " 
+    	 		+ $application.getSubmissionDate() ),
+    	setSubmissionObject( $application )
+   	}
+    
+    retract ( $application )
+    retract ( $result )
+end
+
+rule "Applicant specified by applicant id doesn't exist"
+salience 150
+when
+    $application : Application()
+	$applicantStore : 
+		ApplicantStore( 
+			 !applicantMap.containsKey($application.getApplicantId()) ) 
+    $result : SubmissionResult()
+then
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Applicant doesn't exist for id: " 
+    			+ $application.getApplicantId() ),
+    	setSubmissionObject( $application )
+   	}
+    retract ( $application )
+    retract ( $result )
+end
+
+rule "Application already submitted and accomplished"
+salience 100
+when
+	$application : Application()
+	$applicationStore : 
+		ApplicationStore( 
+			applicationMap.containsKey($application.getApplicantId()) )
+				and
+		ApplicationStore( 
+			applicationMap.get($application.getApplicantId())
+				.getState() == ApplicationState.ACCOMPLISHED )
+    $result : SubmissionResult()
+then
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Application already submitted and accomplished, application submited on: " 
+    			+ $applicationStore.getApplicationMap()
+    				.get($application.getApplicantId()).getSubmissionDate() ),
+    	setSubmissionObject( $application )
+   	}
+    retract ( $application )
+    retract ( $result )
+end
+
+rule "Valid application"
+when
+	$application : Application()
+	$applicationStore : ApplicationStore()
+    $result : SubmissionResult()
+then
+	modify ( $application ) {
+		setState(ApplicationState.PENDING)
+	}
+	modify ( $applicationStore ) {
+		getApplicationMap().put( $application.getApplicantId(), $application )
+	}
+    modify( $result ) {
+    	setAccepted( true ),
+    	getDecisionDescription()
+    		.add( "Accepted" ),
+    	setSubmissionObject( $application )
+   	}
+    retract ( $application )
+    retract ( $result )
+end

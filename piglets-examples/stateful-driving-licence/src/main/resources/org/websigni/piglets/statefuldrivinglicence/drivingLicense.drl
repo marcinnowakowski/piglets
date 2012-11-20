@@ -1,0 +1,69 @@
+package org.websigni.piglets.statefuldrivinglicence;
+
+import java.text.SimpleDateFormat;
+
+rule "Driving licence already has been issued"
+salience 200
+when
+	$drivingLicence : DrivingLicence()
+	$drivingLicenceStore : DrivingLincenceStore(
+		getDrivingLicenceMap().containsKey( $drivingLicence.getDriverId() )
+	)
+    $result : SubmissionResult()
+then
+
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Driving licence issued on: " 
+    			+ $drivingLicenceStore.getDrivingLicenceMap()
+    				.get($drivingLicence.getDriverId()).getIssueDate() ),
+    	setSubmissionObject( $drivingLicence )
+   	}
+    retract ($drivingLicence)
+    retract ($result)	
+end
+
+rule "Valid application pending, driving licence will be issued"
+salience 100
+when
+	$drivingLicence : DrivingLicence()
+	$applicationStore : 
+		ApplicationStore( 
+			applicationMap.containsKey($drivingLicence.getDriverId()) )
+				and
+		ApplicationStore( 
+			applicationMap.get($drivingLicence.getDriverId())
+				.getState() == ApplicationState.PENDING )
+	$drivingLicenceStore : DrivingLincenceStore()
+    $result : SubmissionResult()
+then
+
+    modify( $result ) {
+    	setAccepted( true ),
+    	getDecisionDescription()
+    		.add( "Accepted" ),
+    	setSubmissionObject( $drivingLicence )
+   	}
+   	modify( $drivingLicenceStore ) {
+   		getDrivingLicenceMap().put($drivingLicence.getDriverId(), $drivingLicence)
+   	}
+    
+    retract ($drivingLicence)
+    retract ($result)	
+end
+
+rule "No valid, pending application for specified driver id"
+when
+	$drivingLicence : DrivingLicence()
+    $result : SubmissionResult()
+then
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "No valid, pending application for specified driver id" ),
+    	setSubmissionObject( $drivingLicence )
+   	}
+    retract ($drivingLicence)
+    retract ($result)
+end

@@ -1,0 +1,167 @@
+package org.websigni.piglets.statefuldrivinglicence;
+
+#==============================================================#
+#                      CREATE APPLICANT                        #
+#==============================================================#
+rule "Applicant age invalid"
+salience 200
+when
+    $applicant : Applicant( age < 18 )  
+    $result : SubmissionResult()
+then
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Applicant age invalid, should be age > 18, is: " + $applicant.getAge() ),
+    	setSubmissionObject( $applicant )
+   	}
+    
+    retract ($applicant)
+    retract ($result)
+end
+
+rule "Application already submitted and pending"
+salience 100
+when
+	$applicant : Applicant()
+	$applicationStore : 
+		ApplicationStore( 
+			applicationMap.containsKey($applicant.getIdentificationNumber()) )
+				and
+		ApplicationStore( 
+			applicationMap.get($applicant.getIdentificationNumber())
+				.getState() == ApplicationState.PENDING )
+    $result : SubmissionResult()
+then
+
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Application already submitted and pending, application submited on: " 
+    			+ $applicationStore.getApplicationMap()
+    				.get($applicant.getIdentificationNumber()).getSubmissionDate() ),
+    	setSubmissionObject( $applicant )
+   	}
+    
+    retract ($applicant)
+    retract ($result)	
+end
+
+rule "Application already submitted and accomplished"
+salience 100
+when
+	$applicant : Applicant()
+	$applicationStore : 
+		ApplicationStore( 
+			applicationMap.containsKey($applicant.getIdentificationNumber()) )
+				and
+		ApplicationStore( 
+			applicationMap.get($applicant.getIdentificationNumber())
+				.getState() == ApplicationState.ACCOMPLISHED )
+    $result : SubmissionResult()
+then
+
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Application already submitted and accomplished, application submited on: " 
+    			+ $applicationStore.getApplicationMap()
+    				.get($applicant.getIdentificationNumber()).getSubmissionDate() ),
+    	setSubmissionObject( $applicant )
+   	}
+    
+    retract ($applicant)
+    retract ($result)	
+end
+
+rule "Valid applicant submited"
+when
+	$applicant : Applicant( $id : identificationNumber )
+	$applicantStore : ApplicantStore()
+    $result : SubmissionResult()
+then
+
+	modify ( $applicantStore ) {
+		getApplicantMap().put( $id, $applicant )
+	}
+
+    modify( $result ) {
+    	setAccepted( true ),
+    	getDecisionDescription()
+    		.add( "Applicant with id: " + $id + " submitted" ),
+    	setSubmissionObject( $applicant )
+   	}
+    
+    retract ($applicant)
+    retract ($result)	
+end
+
+#==============================================================#
+#                      DELETE APPLICANT                        #
+#==============================================================#
+rule "Delete applicant not possible, applicant doesn't exits"
+salience 200
+when
+	$applicantDelete : ApplicantDelete( $id : identificationNumber )
+	$applicationStore : 
+		ApplicationStore( 
+			!applicationMap.containsKey( $id ) )
+    $result : SubmissionResult()
+then
+
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Delete applicant not possible, applicant doesn't for id: " + $id),
+    	setSubmissionObject( $applicantDelete )
+   	}
+    
+    retract ($applicantDelete)
+    retract ($result)	
+end
+
+rule "Delete applicant not possible, application for applicant exits"
+salience 100
+when
+	$applicantDelete : ApplicantDelete( $id : identificationNumber )
+	$applicationStore : 
+		ApplicationStore( 
+			applicationMap.containsKey( $id ) )
+    $result : SubmissionResult()
+then
+
+    modify( $result ) {
+    	setAccepted( false ),
+    	getDecisionDescription()
+    		.add( "Delete applicant not possible, application for applicant exits for id: " + $id),
+    	setSubmissionObject( $applicantDelete )
+   	}
+    
+    retract ($applicantDelete)
+    retract ($result)
+end
+
+rule "Valid delete applicant"
+when
+	$applicantDelete : ApplicantDelete( $id : identificationNumber )
+	$applicationStore : 
+		ApplicationStore( 
+			applicationMap.containsKey( $id ) )
+	$applicantStore : ApplicantStore()
+    $result : SubmissionResult()
+then
+
+	modify( $applicantStore ) {
+		getApplicantMap().remove( $id )
+	}
+
+    modify( $result ) {
+    	setAccepted( true ),
+    	getDecisionDescription()
+    		.add( "Applicant with id: " + $id + " deleted"),
+    	setSubmissionObject( $applicantDelete )
+   	}
+    
+    retract ($applicantDelete)
+    retract ($result)
+end

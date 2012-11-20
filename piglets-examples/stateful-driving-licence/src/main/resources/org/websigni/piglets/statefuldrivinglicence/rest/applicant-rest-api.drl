@@ -1,0 +1,100 @@
+package org.websigni.piglets.statefuldrivinglicence.rest;
+
+import org.websigni.piglets.statefuldrivinglicence.Applicant;
+import org.websigni.piglets.statefuldrivinglicence.ApplicantDelete;
+import org.websigni.piglets.statefuldrivinglicence.ApplicantStore;
+import org.websigni.piglets.statefuldrivinglicence.SubmissionResult;
+
+rule "applicants/, GET, ITEM API"
+salience 100
+when
+    $request : 
+    	RestCommand( 
+    		httpCommandType == HttpCommandTypeEnum.GET,
+    		commandScope == CommandScopeEnum.ITEM,
+    		context == "applicants",
+    		$id : id )
+    $response : RestCommandResponse()
+    $applicantStore : ApplicantStore()
+then
+    modify( $response ) {
+    	setResponseContent( $applicantStore.getApplicantMap().get( $id ) )
+   	}
+    
+    retract ($request)
+    retract ($response)
+end
+
+rule "applicants/, PUT, ITEM API"
+salience 100
+when
+    $request : 
+    	RestCommand( httpCommandType == HttpCommandTypeEnum.PUT )
+    		and
+    	RestCommand( commandScope == CommandScopeEnum.ITEM )
+    		and
+    	RestCommand( context == "applicants" )
+    $response : RestCommandResponse()
+then
+    modify( $response ) {
+    	setResponseContent( new SubmissionResult() )
+   	}
+    
+    insert ( (Applicant) $request.getContent() );
+    insert ( (SubmissionResult) $response.getResponseContent() );
+    
+    retract ($request)
+    retract ($response)
+end
+
+rule "applicants/, DELETE, ITEM API"
+salience 100
+when
+    $request : 
+    	RestCommand( httpCommandType == HttpCommandTypeEnum.DELETE )
+    		and
+    	RestCommand( commandScope == CommandScopeEnum.ITEM )
+    		and
+    	RestCommand( context == "applicants" )
+    $response : RestCommandResponse()
+    $applicantStore : ApplicantStore()
+then
+    
+    insert ( (ApplicantDelete) $request.getContent() );
+    insert ( (SubmissionResult) $response.getResponseContent() );
+    
+    retract ($request)
+    retract ($response)
+end
+
+rule "applicants/, default"
+dialect "mvel"
+when
+    $request : 
+    	RestCommand( 
+    		context == "applicants",
+    		$context : context,
+    		$httpType : httpCommandType,
+    		$scope : commandScope
+    	)
+    $response : RestCommandResponse( $rc : responseContent)
+then
+
+	RestCommandFault $rcf = new RestCommandFault()
+	$rcf.setMessage(
+		"Operation not supported: " + $context + ", "
+    	+ $httpType + ", " + $scope
+    )
+    		
+    modify( $response ) {
+    	
+    	setResponseContent( 
+    		$rcf
+		)
+   	}
+    
+    retract ($request)
+    retract ($response)
+end
+
+
