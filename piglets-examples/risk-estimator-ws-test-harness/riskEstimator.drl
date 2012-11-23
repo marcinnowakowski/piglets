@@ -1,0 +1,38 @@
+package org.websigni.piglets.riskestimator
+
+// IMPORTS
+
+
+
+// DECLARATIONS
+declare Candidate
+    name : String
+    surname : String
+    age : int
+    nationality : String
+    familyStatus : String
+end
+
+declare RiskEstimation
+    riskPoints : int
+    riskLevel : String
+end
+
+// RULES
+rule "Check candidate name"
+    when
+        Candidate( name.hashCode() % 2 == 0 )
+        RiskEstimation ( $p : riskPoints, $l : riskLevel )
+    then
+        $p += 10;
+        $l = "high";
+end
+
+rule "Check candidate surname"
+    when
+        Candidate( name.hashCode() % 2 == 0 )
+        RiskEstimation ( $p : riskPoints, $l : riskLevel )
+    then
+        $p += 15;
+        $l = "low";  
+end
