@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Risk-Estimator-Service" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="ProjectSettings@hermesConfig">${#System#user.home}\.hermes</con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="riskEstimator" type="wsdl" bindingName="{http://www.websigni.org/piglets/riskEstimator/}riskEstimatorSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/risk-estimator-ws-test-harness/riskEstimator.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\risk-estimator-ws-test-harness\riskEstimator.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\risk-estimator-ws-test-harness\riskEstimator.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="riskEstimator" targetNamespace="http://www.websigni.org/piglets/riskEstimator/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:risk="http://www.websigni.org/piglets/riskEstimator/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.websigni.org/piglets/riskEstimator/">
+      <xsd:element name="RiskEstimationRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="surname" type="xsd:string"/>
+            <xsd:element name="age" type="xsd:int"/>
+            <xsd:element name="nationality" type="xsd:string"/>
+            <xsd:element name="familyStatus" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RiskEstimationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="riskPoints" type="xsd:int"/>
+            <xsd:element name="riskLevel" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="EstimateRiskRequest">
+    <wsdl:part element="risk:RiskEstimationRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="EstimateRiskResponse">
+    <wsdl:part element="risk:RiskEstimationResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="riskEstimator">
+    <wsdl:operation name="EstimateRisk">
+      <wsdl:input message="risk:EstimateRiskRequest"/>
+      <wsdl:output message="risk:EstimateRiskResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="riskEstimatorSOAP" type="risk:riskEstimator">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="EstimateRisk">
+      <soap:operation soapAction="http://localhost:9999/EstimateRisk"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="riskEstimator">
+    <wsdl:port binding="risk:riskEstimatorSOAP" name="riskEstimatorSOAP">
+      <soap:address location="http://localhost:9999"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9999</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://localhost:9999/EstimateRisk" name="EstimateRisk" bindingOperationName="EstimateRisk" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Candidate_TS_001"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9999</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ris="http://www.websigni.org/piglets/riskEstimator/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ris:RiskEstimationRequest>
+         <name>John</name>
+         <surname>Bow</surname>
+         <age>15</age>
+         <nationality>Irish</nationality>
+         <familyStatus>InRelationship</familyStatus>
+      </ris:RiskEstimationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost:9999/EstimateRisk"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="9999" path="/" host="localhost" name="riskEstimatorMockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="EstimateRisk" interface="riskEstimator" operation="EstimateRisk"><con:settings/><con:dispatchPath>log.info "Dispatch request"
+
+// imports
+import org.drools.KnowledgeBase;
+import org.drools.KnowledgeBaseFactory;
+import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderFactory
+import org.drools.builder.ResourceType;
+import org.drools.io.ResourceFactory;
+import org.drools.runtime.StatelessKnowledgeSession;
+
+//def groovyUtils = new com.eviware.soapui.support.GroovyUtils( context )
+//log.info groovyUtils.projectPath
+
+// dispatch request
+log.info "Dispatch request"
+
+// create XmlHolder for request content
+def holder = new com.eviware.soapui.support.XmlHolder( mockRequest.requestContent )
+
+// set namespaces
+holder.namespaces["risk"] = "http://www.websigni.org/piglets/riskEstimator/"
+ 
+// get request fields
+def name = holder["//name"]
+def surname = holder["//surname"]
+def age = 0
+try { age = Integer.parseInt(holder["//age"]) } catch(e) { } //ignore 
+def nationality = holder["//nationality"]
+def familyStatus = holder["//familyStatus"]
+
+// decide path of the project
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+def projectDir = groovyUtils.projectPath;
+
+// load rules definition
+KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder()
+
+
+kbuilder.add( 
+		ResourceFactory.newFileResource( 
+			projectDir + File.separatorChar + "riskEstimator.drl" 
+		), 
+		ResourceType.DRL )
+
+
+// check for errors
+if ( kbuilder.hasErrors() ) {
+	String knowledgeBuilderErrors = kbuilder.getErrors().toString()
+    System.err.println( knowledgeBuilderErrors )
+    throw new RuntimeException(knowledgeBuilderErrors)
+}
+
+// create knowledge base
+def kbase = KnowledgeBaseFactory.newKnowledgeBase()
+kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() )
+
+// create stateless knowledge session
+StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession()
+
+// create request object
+def candidateType = kbase.getFactType( "org.websigni.piglets.riskestimator", "Candidate" )
+def candidate = candidateType.newInstance()
+candidate.name = name
+candidate.surname = surname
+candidate.age = age
+candidate.nationality = nationality
+candidate.familyStatus = familyStatus
+
+log.info "candidate $candidate"
+
+// create response object
+def riskEstimationType = kbase.getFactType( "org.websigni.piglets.riskestimator", "RiskEstimation" )
+def riskEstimation = riskEstimationType.newInstance()
+riskEstimation.riskPoints = 0
+riskEstimation.riskLevel = "none"
+
+// execute rule
+ksession.execute( [ candidate, riskEstimation ] );
+
+requestContext.riskPoints = riskEstimation.riskPoints
+requestContext.riskLevel = riskEstimation.riskLevel</con:dispatchPath><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:defaultResponse>RiskEstimation_ResponseTemplate</con:defaultResponse><con:response name="RiskEstimation_ResponseTemplate" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ris="http://www.websigni.org/piglets/riskEstimator/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ris:RiskEstimationResponse>
+         <riskPoints>${riskPoints}</riskPoints>
+         <riskLevel>${riskLevel}</riskLevel>
+      </ris:RiskEstimationResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost:9999/EstimateRisk"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties><con:property><con:name>projectDirCustom</con:name><con:value>${projectDir}</con:value></con:property><con:property><con:name>testPropertyInCustom</con:name><con:value>lol</con:value></con:property></con:properties><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
