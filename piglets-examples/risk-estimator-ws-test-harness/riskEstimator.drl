@@ -1,8 +1,8 @@
 package org.websigni.piglets.riskestimator
 
 // IMPORTS
-
-
+import org.apache.log4j.Logger
+import org.apache.commons.lang.ObjectUtils;
 
 // DECLARATIONS
 declare Candidate
@@ -19,20 +19,51 @@ declare RiskEstimation
 end
 
 // RULES
-rule "Check candidate name"
+rule "Risky name"
     when
         Candidate( name.hashCode() % 2 == 0 )
-        RiskEstimation ( $p : riskPoints, $l : riskLevel )
+        $re : RiskEstimation ( $p : riskPoints )
+        $log : Logger()
     then
-        $p += 10;
-        $l = "high";
+    	$log.info("Risky name");
+        $re.setRiskPoints( $p + 15 );
+        $re.setRiskLevel( "medium low" );
 end
 
-rule "Check candidate surname"
+rule "Even more risky surname"
     when
-        Candidate( name.hashCode() % 2 == 0 )
-        RiskEstimation ( $p : riskPoints, $l : riskLevel )
+        Candidate( surname.hashCode() % 2 == 0 )
+        $re : RiskEstimation ( $p : riskPoints )
+        $log : Logger()
     then
-        $p += 15;
-        $l = "low";  
+    	$log.info("Even more risky surname");
+        $re.setRiskPoints( $p + 10 );
+        $re.setRiskLevel( "high" );  
+end
+
+rule "Very young candidate"
+    when
+        Candidate( age < 17 )
+        $re : RiskEstimation ( $p : riskPoints )
+        $log : Logger()
+    then
+    	$log.info("Very young candidate");
+        $re.setRiskPoints( $p + 3 );
+        $re.setRiskLevel( "medium" );
+end
+
+
+rule "Default"
+    when
+        Candidate()
+        $re : RiskEstimation ( $p : riskPoints )
+        $log : Logger()
+    then
+    	$log.info("Default: " + $re.hashCode() );
+        $re.setRiskPoints( $p + 1 );
+        $re.setRiskLevel( "low" );
+        
+        // debug
+        $log.info( "RiskEstimation: " + $re );
+        $log.info( "RiskEstimation: " + ObjectUtils.identityToString( $re ) );
 end

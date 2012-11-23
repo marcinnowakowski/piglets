@@ -63,16 +63,26 @@
          <familyStatus>InRelationship</familyStatus>
       </ris:RiskEstimationRequest>
    </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost:9999/EstimateRisk"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Candidate_TS_002"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9999</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ris="http://www.websigni.org/piglets/riskEstimator/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ris:RiskEstimationRequest>
+         <name>John</name>
+         <surname>John</surname>
+         <age>15</age>
+         <nationality>Irish</nationality>
+         <familyStatus>InRelationship</familyStatus>
+      </ris:RiskEstimationRequest>
+   </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost:9999/EstimateRisk"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="9999" path="/" host="localhost" name="riskEstimatorMockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="EstimateRisk" interface="riskEstimator" operation="EstimateRisk"><con:settings/><con:dispatchPath>log.info "Dispatch request"
 
 // imports
-import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderFactory
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatelessKnowledgeSession;
+import org.apache.commons.lang.ObjectUtils;
 
 //def groovyUtils = new com.eviware.soapui.support.GroovyUtils( context )
 //log.info groovyUtils.projectPath
@@ -99,9 +109,7 @@ def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
 def projectDir = groovyUtils.projectPath;
 
 // load rules definition
-KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder()
-
-
+def kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder()
 kbuilder.add( 
 		ResourceFactory.newFileResource( 
 			projectDir + File.separatorChar + "riskEstimator.drl" 
@@ -139,9 +147,13 @@ def riskEstimationType = kbase.getFactType( "org.websigni.piglets.riskestimator"
 def riskEstimation = riskEstimationType.newInstance()
 riskEstimation.riskPoints = 0
 riskEstimation.riskLevel = "none"
+log.info System.identityHashCode(riskEstimation)
+log.info ObjectUtils.identityToString(riskEstimation)
+
+log.info log.class
 
 // execute rule
-ksession.execute( [ candidate, riskEstimation ] );
+ksession.execute( [ candidate, riskEstimation, log ] );
 
 requestContext.riskPoints = riskEstimation.riskPoints
 requestContext.riskLevel = riskEstimation.riskLevel</con:dispatchPath><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:defaultResponse>RiskEstimation_ResponseTemplate</con:defaultResponse><con:response name="RiskEstimation_ResponseTemplate" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ris="http://www.websigni.org/piglets/riskEstimator/">
