@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Section-Intersection-Test-Suit" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="sectionIntersection" type="wsdl" bindingName="{http://www.wbesigni.org/piglets/sectionIntersetion}sectionIntersectionSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/decision-table-test-runner/sectionIntersection.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\decision-table-test-runner\sectionIntersection.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\decision-table-test-runner\sectionIntersection.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="sectionIntersection" targetNamespace="http://www.wbesigni.org/piglets/sectionIntersetion" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.wbesigni.org/piglets/sectionIntersetion">
+      <xsd:element name="CheckRange">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="start" type="xsd:int"/>
+            <xsd:element name="end" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckRangeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="result">
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="OK"/>
+                  <xsd:enumeration value="FAULT"/>
+                  <xsd:enumeration value="MIXED"/>
+                  <xsd:enumeration value="OUTOFRANGE"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckRangeRequest">
+    <wsdl:part element="sec:CheckRange" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="CheckRangeResponse">
+    <wsdl:part element="sec:CheckRangeResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="sectionIntersection">
+    <wsdl:operation name="CheckRange">
+      <wsdl:input message="sec:CheckRangeRequest"/>
+      <wsdl:output message="sec:CheckRangeResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="sectionIntersectionSOAP" type="sec:sectionIntersection">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CheckRange">
+      <soap:operation soapAction="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="sectionIntersection">
+    <wsdl:port binding="sec:sectionIntersectionSOAP" name="sectionIntersectionSOAP">
+      <soap:address location="http://localhost:9998/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9998/</con:endpoint><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation" name="CheckRange" bindingOperationName="CheckRange" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="TC_0_range_0_16"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>0</start>
+         <end>16</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_1_range_8_16"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>8</start>
+         <end>16</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_3_range_0_2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>0</start>
+         <end>2</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_3_range_2_4"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>2</start>
+         <end>4</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_3_range_4_6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>4</start>
+         <end>6</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_3_range_6_8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>6</start>
+         <end>8</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="sectionIntersectionTestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="sectionIntersection TestSuite" searchProperties="true" id="dc70a55c-6893-487a-ad45-120ba0a7d341"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="9998" path="/sectionIntersectionMockService" host="WN7X64-3NNHM4J" name="sectionIntersectionMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="CheckRange" interface="sectionIntersection" operation="CheckRange"><con:settings/><con:dispatchPath>log.info "Dispatch request"
+
+// imports
+import com.eviware.soapui.support.XmlHolder;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
+// create XmlHolder for request content
+def holder = new XmlHolder( mockRequest.requestContent )
+
+// set namespaces
+holder.namespaces["sec"] = "http://www.wbesigni.org/piglets/sectionIntersetion/"
+ 
+// get request fields
+def start = Integer.parseInt(holder["//start"])
+def end = Integer.parseInt(holder["//end"])
+
+def result
+if (start >= end) {
+	result = "OUTOFRANGE"
+} else if ( start &lt; 0 ) {
+	result = "OUTOFRANGE"	
+} else if ( end > 16 ) {
+	result = "OUTOFRANGE"
+} else {
+	result = functionTest( this.&amp;f, start )
+	for (i in 1..100) {
+	  	if ( functionTest( this.&amp;f, start + i* ((end - start) / 100.0) ) != result )
+			result = "MIXED"
+	}
+}
+
+requestContext.result = result
+return "TC_all_Response_template"
+
+def String functionTest (f , x ) {
+	if ( f(x) > 0.5 )
+		return "OK"
+	else
+		return "FAULT"
+}
+
+def double f ( double x) {
+	 return sin( x*x*x/16/16 + cos(x) ) / 2 + 0.5
+}
+</con:dispatchPath><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:defaultResponse>TC_all_Response_template</con:defaultResponse><con:response name="TC_all_Response_template" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRangeResponse>
+         <result>${result}</result>
+      </sec:CheckRangeResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
