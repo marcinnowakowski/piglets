@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="Section-Intersection-Test-Suit" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="sectionIntersection" type="wsdl" bindingName="{http://www.wbesigni.org/piglets/sectionIntersetion}sectionIntersectionSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/decision-table-test-runner/sectionIntersection.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\decision-table-test-runner\sectionIntersection.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\decision-table-test-runner\sectionIntersection.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="sectionIntersection" targetNamespace="http://www.wbesigni.org/piglets/sectionIntersetion" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="Section-Intersection-Test-Suit" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="sectionIntersection" type="wsdl" bindingName="{http://www.wbesigni.org/piglets/sectionIntersetion}sectionIntersectionSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/decision-table-test-runner/sectionIntersection.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\decision-table-test-runner\sectionIntersection.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\decision-table-test-runner\sectionIntersection.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="sectionIntersection" targetNamespace="http://www.wbesigni.org/piglets/sectionIntersetion" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
     <xsd:schema targetNamespace="http://www.wbesigni.org/piglets/sectionIntersetion">
       <xsd:element name="CheckRange">
@@ -105,7 +105,50 @@
          <end>8</end>
       </sec:CheckRange>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="sectionIntersectionTestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="sectionIntersection TestSuite" searchProperties="true" id="dc70a55c-6893-487a-ad45-120ba0a7d341"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="9998" path="/sectionIntersectionMockService" host="WN7X64-3NNHM4J" name="sectionIntersectionMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="CheckRange" interface="sectionIntersection" operation="CheckRange"><con:settings/><con:dispatchPath>log.info "Dispatch request"
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="sectionIntersectionTestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="sectionIntersection TestSuite" searchProperties="true" id="dc70a55c-6893-487a-ad45-120ba0a7d341"><con:settings/><con:testStep type="groovy" name="MainTestFlow"><con:settings/><con:config><script>log.info "Running test"
+
+// explore test runner methods
+//testRunner.class.methods.each {
+//	log.info it
+//}
+
+// imports 
+import com.eviware.soapui.support.XmlHolder
+
+runSingleSectionIntersetionTest(13,17)
+
+def String runSingleSectionIntersetionTest( start, end ) {
+
+	log.info "enter SectionIntersection($start,$end)"
+	
+	// set input values
+	testRunner.runContext.startArg = start
+	testRunner.runContext.endArg = end
+
+	// run test
+	resultContainter = testRunner.runTestStepByName( "TC_all_Request_template" )
+	
+	// create XmlHolder for request content
+	def holder = new XmlHolder( resultContainter.responseContent )
+	
+	// set namespaces
+	holder.namespaces["sec"] = "http://www.wbesigni.org/piglets/sectionIntersetion"
+	
+	// get request fields
+	def resultString = holder["//result"]
+
+	log.info "exit SectionIntersection($start,$end): $resultString"
+	return resultString
+}
+</script></con:config></con:testStep><con:testStep type="request" name="TC_all_Request_template" disabled="true"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>sectionIntersection</con:interface><con:operation>CheckRange</con:operation><con:request name="TC_all_Request_template"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9998/sectionIntersectionMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.wbesigni.org/piglets/sectionIntersetion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sec:CheckRange>
+         <start>${startArg}</start>
+         <end>${endArg}</end>
+      </sec:CheckRange>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="9998" path="/sectionIntersectionMockService" host="WN7X64-3NNHM4J" name="sectionIntersectionMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="CheckRange" interface="sectionIntersection" operation="CheckRange"><con:settings/><con:dispatchPath>log.info "Dispatch request"
 
 // imports
 import com.eviware.soapui.support.XmlHolder;
