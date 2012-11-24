@@ -84,12 +84,6 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatelessKnowledgeSession;
 import org.apache.commons.lang.ObjectUtils;
 
-//def groovyUtils = new com.eviware.soapui.support.GroovyUtils( context )
-//log.info groovyUtils.projectPath
-
-// dispatch request
-log.info "Dispatch request"
-
 // create XmlHolder for request content
 def holder = new com.eviware.soapui.support.XmlHolder( mockRequest.requestContent )
 
