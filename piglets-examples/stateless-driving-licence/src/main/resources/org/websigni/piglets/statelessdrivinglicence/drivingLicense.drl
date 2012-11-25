@@ -1,0 +1,37 @@
+package org.websigni.piglets.statelessdrivinglicence;
+
+import java.text.SimpleDateFormat;
+
+rule "Validate age of applicant"
+when
+    $applicant : Applicant( age < 18 )  
+    $result : SubmissionResult()
+then
+    $applicant.setValid( false );
+    $result.getDecisionDescription().add( "Applicant age invalid. Applicant.age should be > 18 is: " + $applicant.getAge() );
+end
+
+rule "Validate application submission year"
+when
+    $application : Application( 
+    	submissionDate < (new SimpleDateFormat("dd MMM yyyy")).parse("01 jan 2012") 
+    	|| submissionDate == nil 
+    )
+    $result : SubmissionResult()
+then
+    $application.setValid( false );
+    $result.getDecisionDescription().add( "Submission date invalid. Application.submissnionDate should be >= 01-jan-2012 is: " + $application.getSubmissionDate() );
+end
+
+rule "Add applicant and application to result"
+when
+	$applicant : Applicant( age >= 18 )  
+	$application : Application( 
+    	submissionDate >= (new SimpleDateFormat("dd MMM yyyy")).parse("01 jan 2012") 
+    )
+	$result : SubmissionResult()
+then
+	$result.setApplicant( $applicant );
+	$result.setApplication ( $application );
+	$result.getDecisionDescription().add( "Application accepted" );
+end
