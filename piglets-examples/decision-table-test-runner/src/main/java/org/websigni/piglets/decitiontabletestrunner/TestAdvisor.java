@@ -30,38 +30,73 @@ import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.decisiontable.ExternalSpreadsheetCompiler;
+import org.drools.definition.type.FactType;
 import org.drools.io.ResourceFactory;
 import org.drools.io.impl.ByteArrayResource;
 import org.drools.runtime.StatefulKnowledgeSession;
 
 public class TestAdvisor {
 
-	final List<String> testCasesToRunList = new ArrayList<String>();
-	StatefulKnowledgeSession ksession;
+	private final List<String> testCasesToRunList = new ArrayList<String>();
+	private StatefulKnowledgeSession ksession;
+	private FactType testCaseRunType;
 	
-    public static void main(String[] args) {
-        TestAdvisor launcher = new TestAdvisor();
-        launcher.init();
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        TestAdvisor advisor = new TestAdvisor();
+        advisor.init("RUN_001");
+        advisor.execute();
+        
+        while (advisor.retrieveTestCaseList().size() > 0) {
+        	for (Object testCaseRun : advisor.retrieveTestCaseList()) {
+        		advisor.setTestCaseRunResult(testCaseRun, "MIXED");
+        		advisor.submitTestCaseRun(testCaseRun);
+        	}
+        	
+        	System.out.println(advisor.retrieveTestCaseList());
+        
+        	advisor.clearTestCaseList();
+        	advisor.execute();
+        	System.out.println(advisor.retrieveTestCaseList());
+        }
+        
     }
 
-    public void init() {
+    public void init(String runId) throws InstantiationException, IllegalAccessException {
     	
         // build knowledge base
         final KnowledgeBase kbase = this.buildKnowledgeBase();
 
+        // retrieve type declared in rule definition
+        testCaseRunType = kbase.getFactType( "org.websigni.piglets.decitiontabletestrunner", "TestCaseRun" );
+        FactType runType = kbase.getFactType( "org.websigni.piglets.decitiontabletestrunner", "Run" );
+        
         // build knowledge session
-        StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+        ksession = kbase.newStatefulKnowledgeSession();
     	
         // initiale global variables
         ksession.setGlobal( "testCasesToRunList", testCasesToRunList );
+        
+        // prepare for execution
+        // create Run object
+        Object run = runType.newInstance();
+        runType.set(run, "runId", runId);
+        ksession.insert(run);
     }
     
-    public void submitResult(Object result) {
-    	ksession.insert(result);
+    public void submitTestCaseRun(Object testCaseRun) {
+    	ksession.insert(testCaseRun);
+    }
+    
+    public void setTestCaseRunResult(Object testCaseRun, String result) {
+    	testCaseRunType.set(testCaseRun, "result", result);
     }
     
     public void clearTestCaseList() {
     	testCasesToRunList.clear();
+    }
+    
+    public int execute() {
+    	return ksession.fireAllRules();
     }
     
     @SuppressWarnings("rawtypes")
@@ -92,8 +127,9 @@ public class TestAdvisor {
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         kbuilder.add(new ByteArrayResource(drl.getBytes()), ResourceType.DRL);
 
-        //Uncomment to see the rules
-        System.out.println(drl);
+        // Debug
+        // Uncomment to see the rules
+        // System.out.println(drl);
         
         //compilation errors?
         if (kbuilder.hasErrors()) {

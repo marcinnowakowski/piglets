@@ -27,34 +27,48 @@ rule "Test hierarchy always_@{row.rowNumber}"
     when
         Run( "@{run_strategy}" == "always" )
     then
-        testCasesToRunList.add( new TestCaseRun("@{test_case_id}", @{start_arg}, @{end_arg}) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "@{test_case_id}" );
+    	tc.setStartArg( @{start_arg} );
+    	tc.setEndArg( @{end_arg} );
+        testCasesToRunList.add( tc );
 end
 
 rule "Test hierarchy if_parent_run_@{row.rowNumber}"
     when
         Run( "@{run_strategy}" == "if parent run" )
-        TestCaseRun ( test_case_id == @{parent_test_case_id} )
+        exists TestCaseRun ( testCaseId == "@{parent_test_case_id}" )
     then
-        testCasesToRunList.add( new TestCaseRun("@{test_case_id}", @{start_arg}, @{end_arg}) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "@{test_case_id}" );
+    	tc.setStartArg( @{start_arg} );
+    	tc.setEndArg( @{end_arg} );
+        testCasesToRunList.add( tc );
 end
 
 rule "Test hierarchy if_parent_not_run_@{row.rowNumber}"
     when
         Run( "@{run_strategy}" == "if parent not run" )
-        !TestCaseRun ( test_case_id == @{parent_test_case_id} )
+        forall ( TestCaseRun ( testCaseId != "@{parent_test_case_id}" ) )
+        forall ( TestCaseRun ( testCaseId != "@{test_case_id}" ) )
     then
-        testCasesToRunList.add( new TestCaseRun("@{test_case_id}", @{start_arg}, @{end_arg}) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "@{test_case_id}" );
+    	tc.setStartArg( @{start_arg} );
+    	tc.setEndArg( @{end_arg} );
+        testCasesToRunList.add( tc );
 end
 
 rule "Test hierarchy if_parent_result_@{row.rowNumber}"
     when
         Run( "@{run_strategy}" == "if parent result" )
-        TestCaseRun ( 
-        	test_case_id == @{parent_test_case_id},
-        	result == 
-       	)
+        exists TestCaseRun (testCaseId == "@{parent_test_case_id}" && result == "@{parent_result}")
     then
-        testCasesToRunList.add( new TestCaseRun("@{test_case_id}", @{start_arg}, @{end_arg}) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "@{test_case_id}" );
+    	tc.setStartArg( @{start_arg} );
+    	tc.setEndArg( @{end_arg} );
+        testCasesToRunList.add( tc );
 end
 
 end template

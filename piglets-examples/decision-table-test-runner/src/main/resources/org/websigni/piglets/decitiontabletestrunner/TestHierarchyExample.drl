@@ -12,31 +12,1396 @@ end
 
 rule "Test hierarchy always_31"
     when
-        Run( "if parent result" == "always" )
+        Run( "if parent not run" == "always" )
     then
-        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_031" );
+    	tc.setStartArg( 15 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
 end
 rule "Test hierarchy if_parent_run_31"
     when
-        Run( "if parent result" == "if parent run" )
-        TestCaseRun ( test_case_id == TS_015 )
+        Run( "if parent not run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_015" )
     then
-        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_031" );
+    	tc.setStartArg( 15 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
 end
 rule "Test hierarchy if_parent_not_run_31"
     when
-        Run( "if parent result" == "if parent not run" )
-        !TestCaseRun ( test_case_id == TS_015 )
+        Run( "if parent not run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_015" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_031" ) )
     then
-        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_031" );
+    	tc.setStartArg( 15 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
 end
 rule "Test hierarchy if_parent_result_31"
     when
-        Run( "if parent result" == "if parent result" )
-        TestCaseRun ( 
-        	test_case_id == TS_015,
-        	result == 
-       	)
+        Run( "if parent not run" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_015" && result == "FAULT")
     then
-        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_031" );
+    	tc.setStartArg( 15 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
 end
+
+rule "Test hierarchy always_30"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_030" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 15 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_30"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_015" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_030" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 15 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_30"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_015" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_030" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_030" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 15 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_30"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_015" && result == "FAULT")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_030" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 15 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_29"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_029" );
+    	tc.setStartArg( 13 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_29"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_014" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_029" );
+    	tc.setStartArg( 13 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_29"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_014" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_029" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_029" );
+    	tc.setStartArg( 13 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_29"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_014" && result == "FAULT")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_029" );
+    	tc.setStartArg( 13 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_28"
+    when
+        Run( "if parent not run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_028" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 13 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_28"
+    when
+        Run( "if parent not run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_014" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_028" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 13 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_28"
+    when
+        Run( "if parent not run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_014" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_028" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_028" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 13 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_28"
+    when
+        Run( "if parent not run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_028" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 13 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_27"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_027" );
+    	tc.setStartArg( 11 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_27"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_013" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_027" );
+    	tc.setStartArg( 11 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_27"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_013" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_027" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_027" );
+    	tc.setStartArg( 11 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_27"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_013" && result == "OK")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_027" );
+    	tc.setStartArg( 11 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_26"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_026" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 11 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_26"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_013" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_026" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 11 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_26"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_013" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_026" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_026" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 11 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_26"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_013" && result == "OK")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_026" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 11 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_25"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_025" );
+    	tc.setStartArg( 9 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_25"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_012" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_025" );
+    	tc.setStartArg( 9 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_25"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_012" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_025" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_025" );
+    	tc.setStartArg( 9 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_25"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_012" && result == "OK")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_025" );
+    	tc.setStartArg( 9 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_24"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_024" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 9 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_24"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_012" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_024" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 9 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_24"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_012" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_024" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_024" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 9 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_24"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_012" && result == "OK")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_024" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 9 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_23"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_023" );
+    	tc.setStartArg( 7 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_23"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_011" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_023" );
+    	tc.setStartArg( 7 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_23"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_011" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_023" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_023" );
+    	tc.setStartArg( 7 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_23"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_011" && result == "OK")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_023" );
+    	tc.setStartArg( 7 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_22"
+    when
+        Run( "if parent not run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_022" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 7 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_22"
+    when
+        Run( "if parent not run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_011" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_022" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 7 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_22"
+    when
+        Run( "if parent not run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_011" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_022" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_022" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 7 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_22"
+    when
+        Run( "if parent not run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_022" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 7 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_21"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_021" );
+    	tc.setStartArg( 5 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_21"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_010" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_021" );
+    	tc.setStartArg( 5 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_21"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_010" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_021" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_021" );
+    	tc.setStartArg( 5 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_21"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_021" );
+    	tc.setStartArg( 5 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_20"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_020" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 5 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_20"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_010" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_020" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 5 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_20"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_010" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_020" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_020" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 5 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_20"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_010" && result == "MIXED")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_020" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 5 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_19"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_019" );
+    	tc.setStartArg( 3 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_19"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_009" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_019" );
+    	tc.setStartArg( 3 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_19"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_009" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_019" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_019" );
+    	tc.setStartArg( 3 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_19"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_009" && result == "MIXED")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_019" );
+    	tc.setStartArg( 3 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_18"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_018" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 3 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_18"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_009" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_018" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 3 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_18"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_009" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_018" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_018" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 3 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_18"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_009" && result == "MIXED")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_018" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 3 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_17"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_017" );
+    	tc.setStartArg( 1 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_17"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_008" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_017" );
+    	tc.setStartArg( 1 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_17"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_008" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_017" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_017" );
+    	tc.setStartArg( 1 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_17"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_008" && result == "MIXED")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_017" );
+    	tc.setStartArg( 1 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_16"
+    when
+        Run( "if parent result" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_016" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 1 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_16"
+    when
+        Run( "if parent result" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_008" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_016" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 1 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_16"
+    when
+        Run( "if parent result" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_008" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_016" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_016" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 1 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_16"
+    when
+        Run( "if parent result" == "if parent result" )
+        exists TestCaseRun (testCaseId == "TC_008" && result == "MIXED")
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_016" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 1 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_15"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_015" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_15"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_007" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_015" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_15"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_007" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_015" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_015" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_15"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_015" );
+    	tc.setStartArg( 14 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_14"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_014" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_14"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_007" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_014" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_14"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_007" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_014" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_014" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_14"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_014" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 14 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_13"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_013" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_13"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_006" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_013" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_13"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_006" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_013" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_013" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_13"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_013" );
+    	tc.setStartArg( 10 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_12"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_012" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_12"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_006" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_012" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_12"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_006" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_012" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_012" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_12"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_012" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 10 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_11"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_011" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_11"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_005" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_011" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_11"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_005" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_011" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_011" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_11"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_011" );
+    	tc.setStartArg( 6 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_10"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_010" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_10"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_005" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_010" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_10"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_005" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_010" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_010" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_10"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_010" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 6 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_9"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_009" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_9"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_004" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_009" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_9"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_004" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_009" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_009" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_9"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_009" );
+    	tc.setStartArg( 2 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_8"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_008" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_8"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_004" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_008" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_8"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_004" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_008" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_008" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_8"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_008" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 2 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_7"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_007" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_7"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_003" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_007" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_7"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_003" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_007" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_007" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_7"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_007" );
+    	tc.setStartArg( 12 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_6"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_006" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_6"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_003" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_006" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_6"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_003" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_006" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_006" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_6"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_006" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 12 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_5"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_005" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_5"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_002" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_005" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_5"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_002" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_005" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_005" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_5"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_005" );
+    	tc.setStartArg( 4 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_4"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_004" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_4"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_002" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_004" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_4"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_002" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_004" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_004" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_4"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_004" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 4 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_3"
+    when
+        Run( "never" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_003" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_3"
+    when
+        Run( "never" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_001" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_003" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_3"
+    when
+        Run( "never" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_001" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_003" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_003" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_3"
+    when
+        Run( "never" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_003" );
+    	tc.setStartArg( 8 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_2"
+    when
+        Run( "if parent run" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_002" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_2"
+    when
+        Run( "if parent run" == "if parent run" )
+        exists TestCaseRun ( testCaseId == "TC_001" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_002" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_2"
+    when
+        Run( "if parent run" == "if parent not run" )
+        forall ( TestCaseRun ( testCaseId != "TC_001" ) )
+        forall ( TestCaseRun ( testCaseId != "TC_002" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_002" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_2"
+    when
+        Run( "if parent run" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_002" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 8 );
+        testCasesToRunList.add( tc );
+end
+
+rule "Test hierarchy always_1"
+    when
+        Run( "always" == "always" )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_001" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_run_1"
+    when
+        Run( "always" == "if parent run" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_001" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_not_run_1"
+    when
+        Run( "always" == "if parent not run" )
+
+        forall ( TestCaseRun ( testCaseId != "TC_001" ) )
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_001" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+rule "Test hierarchy if_parent_result_1"
+    when
+        Run( "always" == "if parent result" )
+
+    then
+    	TestCaseRun tc = new TestCaseRun();
+    	tc.setTestCaseId( "TC_001" );
+    	tc.setStartArg( 0 );
+    	tc.setEndArg( 16 );
+        testCasesToRunList.add( tc );
+end
+
