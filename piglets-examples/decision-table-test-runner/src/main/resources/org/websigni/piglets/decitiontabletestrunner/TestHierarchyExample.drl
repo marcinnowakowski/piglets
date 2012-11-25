@@ -1,0 +1,42 @@
+package org.websigni.piglets.decitiontabletestrunner;
+global java.util.List testCasesToRunList;
+declare Run
+runId : String
+end
+declare TestCaseRun
+testCaseId : String
+startArg : int
+endArg : int
+result : String
+end
+
+rule "Test hierarchy always_31"
+    when
+        Run( "if parent result" == "always" )
+    then
+        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+end
+rule "Test hierarchy if_parent_run_31"
+    when
+        Run( "if parent result" == "if parent run" )
+        TestCaseRun ( test_case_id == TS_015 )
+    then
+        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+end
+rule "Test hierarchy if_parent_not_run_31"
+    when
+        Run( "if parent result" == "if parent not run" )
+        !TestCaseRun ( test_case_id == TS_015 )
+    then
+        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+end
+rule "Test hierarchy if_parent_result_31"
+    when
+        Run( "if parent result" == "if parent result" )
+        TestCaseRun ( 
+        	test_case_id == TS_015,
+        	result == 
+       	)
+    then
+        testCasesToRunList.add( new TestCaseRun("TC_031", 15, 16) );
+end
