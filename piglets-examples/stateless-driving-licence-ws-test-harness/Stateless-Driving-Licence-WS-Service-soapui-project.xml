@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="Stateless-Driving-Licence-WS-Service" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="drivingLicence" type="wsdl" bindingName="{http://www.websigni.org/drivingLicence/}drivingLicenceSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/stateless-driving-licence-ws-test-harness/drivingLicence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="drivingLicence" targetNamespace="http://www.websigni.org/drivingLicence/" xmlns:drlc="http://www.websigni.org/drivingLicence/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="Stateless-Driving-Licence-WS-Service" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="drivingLicence" type="wsdl" bindingName="{http://www.websigni.org/drivingLicence/}drivingLicenceSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/stateless-driving-licence-ws-test-harness/drivingLicence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="drivingLicence" targetNamespace="http://www.websigni.org/drivingLicence/" xmlns:drlc="http://www.websigni.org/drivingLicence/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
     <xsd:schema targetNamespace="http://www.websigni.org/drivingLicence/">
       <xsd:element name="SubmitDrivingLicenceApplication">
@@ -179,6 +179,9 @@
 // imports
 import com.eviware.soapui.support.XmlHolder
 import java.text.SimpleDateFormat
+import org.websigni.piglets.statelessdrivinglicence.Applicant
+import org.websigni.piglets.statelessdrivinglicence.Application
+import org.websigni.piglets.statelessdrivinglicence.StatelessDrivingLicenceValidator
 
 // create XmlHolder for request content
 def holder = new XmlHolder( mockRequest.requestContent )
@@ -207,6 +210,21 @@ if ( messageId =~ /TC_5[0-9]{2}/ ) {
 	// logic handle by drools 
 	responseName = "TC_50x_template"
 
+	// create applicant
+	def applicant = new Applicant()
+	applicant.identificationNumber = identificationNumber
+	applicant.age = age
+
+	// create application
+	def application = new Application()
+	application.submissionDate = submissionDate
+
+	def validator = new StatelessDrivingLicenceValidator()
+	def result = validator.submitApplication applicant, application
+
+	accepted = result.accepted
+	decisionDescriptionsList = result.decisionDescription
+
 } else {
 	// simple mock service implementation
 	switch( messageId ) {
@@ -224,7 +242,7 @@ requestContext.age = age
 requestContext.applicationNumber = applicationNumber
 requestContext.submissionDate = submissionDate ? new SimpleDateFormat("yyyyMMdd").format(submissionDate) : submissionDate
 requestContext.accepted = accepted
-requestContext.decisionDescriptionsList = decisionDescriptionsList
+decisionDescriptionsList.each{ requestContext.decisionDescriptionsList = "\t\t&lt;decisionDescription>$it&lt;/decisionDescription>\n" }
 
 return responseName
 </con:dispatchPath><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:defaultResponse>TC_999_default</con:defaultResponse><con:response name="TC_001_accepted" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
@@ -292,7 +310,7 @@ return responseName
             <!--
             <decisionDescription>...</decisionDescription>
             -->
-            ${decissionDescriptionsList}
+            ${decisionDescriptionsList}
          </submissionResult>
       </driv:SubmitDrivingLicenceApplicationResponse>
    </soapenv:Body>
@@ -318,4 +336,4 @@ return responseName
          </submissionResult>
       </driv:SubmitDrivingLicenceApplicationResponse>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
