@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Stateless-Driving-Licence-WS-Service" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="drivingLicence" type="wsdl" bindingName="{http://www.websigni.org/drivingLicence/}drivingLicenceSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/stateless-driving-licence-ws-test-harness/drivingLicence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="drivingLicence" targetNamespace="http://www.websigni.org/drivingLicence/" xmlns:drlc="http://www.websigni.org/drivingLicence/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.websigni.org/drivingLicence/">
+      <xsd:element name="SubmitDrivingLicenceApplication">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:string"/>
+            <xsd:element name="applicant" type="drlc:Applicant"/>
+            <xsd:element name="application" type="drlc:Application"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SubmitDrivingLicenceApplicationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:string"/>
+            <xsd:element name="submissionResult" type="drlc:SubmissionResult"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Applicant">
+        <xsd:sequence>
+          <xsd:element name="identificationNumber" type="xsd:string"></xsd:element>
+          <xsd:element name="name" type="xsd:string"/>
+          <xsd:element name="surname" type="xsd:string"/>
+          <xsd:element name="age" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Application">
+        <xsd:sequence>
+          <xsd:element name="number" type="xsd:string"/>
+          <xsd:element name="submissionDate" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SubmissionResult">
+        <xsd:sequence>
+          <xsd:element name="applicant" type="drlc:Applicant"/>
+          <xsd:element name="application" type="drlc:Application"/>
+          <xsd:element name="accepted" type="xsd:boolean"/>
+          <xsd:element name="decisionDescription" type="xsd:string" maxOccurs="unbounded" minOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SubmitDrivingLicenceApplicationRequest">
+    <wsdl:part element="drlc:SubmitDrivingLicenceApplication" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitDrivingLicenceApplicationResponse">
+    <wsdl:part element="drlc:SubmitDrivingLicenceApplicationResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="drivingLicence">
+    <wsdl:operation name="SubmitDrivingLicenceApplication">
+      <wsdl:input message="drlc:SubmitDrivingLicenceApplicationRequest"/>
+      <wsdl:output message="drlc:SubmitDrivingLicenceApplicationResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="drivingLicenceSOAP" type="drlc:drivingLicence">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SubmitDrivingLicenceApplication">
+      <soap:operation soapAction="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="drivingLicence">
+    <wsdl:port binding="drlc:drivingLicenceSOAP" name="drivingLicenceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://www.example.org/</con:endpoint><con:endpoint>http://WN7X64-3NNHM4J:9997/statelessDrivingLicenceMockService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication" name="SubmitDrivingLicenceApplication" bindingOperationName="SubmitDrivingLicenceApplication" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="TC_001_accepted"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>?</messageId>
+         <applicant>
+            <identificationNumber>?</identificationNumber>
+            <name>?</name>
+            <surname>?</surname>
+            <age>?</age>
+         </applicant>
+         <application>
+            <number>?</number>
+            <submissionDate>?</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_002_rejected"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>?</messageId>
+         <applicant>
+            <identificationNumber>?</identificationNumber>
+            <name>?</name>
+            <surname>?</surname>
+            <age>?</age>
+         </applicant>
+         <application>
+            <number>?</number>
+            <submissionDate>?</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_501_accepted"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>?</messageId>
+         <applicant>
+            <identificationNumber>?</identificationNumber>
+            <name>?</name>
+            <surname>?</surname>
+            <age>?</age>
+         </applicant>
+         <application>
+            <number>?</number>
+            <submissionDate>?</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_502_applicant_rejected"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>?</messageId>
+         <applicant>
+            <identificationNumber>?</identificationNumber>
+            <name>?</name>
+            <surname>?</surname>
+            <age>?</age>
+         </applicant>
+         <application>
+            <number>?</number>
+            <submissionDate>?</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_503_application_rejected"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>?</messageId>
+         <applicant>
+            <identificationNumber>?</identificationNumber>
+            <name>?</name>
+            <surname>?</surname>
+            <age>?</age>
+         </applicant>
+         <application>
+            <number>?</number>
+            <submissionDate>?</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call><con:call name="TC_999_default"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>?</messageId>
+         <applicant>
+            <identificationNumber>?</identificationNumber>
+            <name>?</name>
+            <surname>?</surname>
+            <age>?</age>
+         </applicant>
+         <application>
+            <number>?</number>
+            <submissionDate>?</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="9997" path="/statelessDrivingLicenceMockService" host="WN7X64-3NNHM4J" name="drivingLicenceMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="SubmitDrivingLicenceApplication" interface="drivingLicence" operation="SubmitDrivingLicenceApplication"><con:settings/><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:defaultResponse>TC_999_default</con:defaultResponse><con:response name="TC_001_accepted" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplicationResponse>
+         <messageId>?</messageId>
+         <submissionResult>
+            <applicant>
+               <identificationNumber>?</identificationNumber>
+               <name>?</name>
+               <surname>?</surname>
+               <age>?</age>
+            </applicant>
+            <application>
+               <number>?</number>
+               <submissionDate>?</submissionDate>
+            </application>
+            <accepted>?</accepted>
+            <!--1 or more repetitions:-->
+            <decisionDescription>?</decisionDescription>
+         </submissionResult>
+      </driv:SubmitDrivingLicenceApplicationResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/></con:response><con:response name="TC_002_rejected" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplicationResponse>
+         <messageId>?</messageId>
+         <submissionResult>
+            <applicant>
+               <identificationNumber>?</identificationNumber>
+               <name>?</name>
+               <surname>?</surname>
+               <age>?</age>
+            </applicant>
+            <application>
+               <number>?</number>
+               <submissionDate>?</submissionDate>
+            </application>
+            <accepted>?</accepted>
+            <!--1 or more repetitions:-->
+            <decisionDescription>?</decisionDescription>
+         </submissionResult>
+      </driv:SubmitDrivingLicenceApplicationResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/></con:response><con:response name="TC_50x_template" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplicationResponse>
+         <messageId>?</messageId>
+         <submissionResult>
+            <applicant>
+               <identificationNumber>?</identificationNumber>
+               <name>?</name>
+               <surname>?</surname>
+               <age>?</age>
+            </applicant>
+            <application>
+               <number>?</number>
+               <submissionDate>?</submissionDate>
+            </application>
+            <accepted>?</accepted>
+            <!--1 or more repetitions:-->
+            <decisionDescription>?</decisionDescription>
+         </submissionResult>
+      </driv:SubmitDrivingLicenceApplicationResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/></con:response><con:response name="TC_999_default" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplicationResponse>
+         <messageId>?</messageId>
+         <submissionResult>
+            <applicant>
+               <identificationNumber>?</identificationNumber>
+               <name>?</name>
+               <surname>?</surname>
+               <age>?</age>
+            </applicant>
+            <application>
+               <number>?</number>
+               <submissionDate>?</submissionDate>
+            </application>
+            <accepted>?</accepted>
+            <!--1 or more repetitions:-->
+            <decisionDescription>?</decisionDescription>
+         </submissionResult>
+      </driv:SubmitDrivingLicenceApplicationResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
