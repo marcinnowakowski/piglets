@@ -114,8 +114,34 @@
 
 // imports 
 import com.eviware.soapui.support.XmlHolder
+import org.websigni.piglets.decitiontabletestrunner.TestAdvisor
 
-runSingleSectionIntersetionTest(13,17)
+// initiate drools advisor
+def advisor = new TestAdvisor()
+advisor.init("RUN_001");
+
+// initial run, create first advice list
+advisor.execute();
+
+// iterate until advised tests list is empty
+while (advisor.retrieveTestCaseList().size() > 0) {
+	
+	// run test for each advice
+	for (testCaseRun in advisor.retrieveTestCaseList()) {
+
+		// run test
+		testCaseRun.result = 
+			runSingleSectionIntersetionTest( testCaseRun.startArg, testCaseRun.endArg )
+		
+		advisor.submitTestCaseRun(testCaseRun);
+	}
+
+	// clear old advice list
+	advisor.clearTestCaseList();
+
+	// create new advice list
+	advisor.execute();
+}
 
 def String runSingleSectionIntersetionTest( start, end ) {
 
@@ -200,4 +226,4 @@ def double f ( double x) {
          <result>${result}</result>
       </sec:CheckRangeResponse>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.wbesigni.org/piglets/sectionIntersetion/NewOperation"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
