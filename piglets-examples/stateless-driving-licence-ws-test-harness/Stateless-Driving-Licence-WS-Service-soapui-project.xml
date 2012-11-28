@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="Stateless-Driving-Licence-WS-Service" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="drivingLicence" type="wsdl" bindingName="{http://www.websigni.org/drivingLicence/}drivingLicenceSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/stateless-driving-licence-ws-test-harness/drivingLicence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="drivingLicence" targetNamespace="http://www.websigni.org/drivingLicence/" xmlns:drlc="http://www.websigni.org/drivingLicence/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="Stateless-Driving-Licence-WS-Service" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="CI_TestSuit_001"/>
+  <con:entry key="Report to Generate" value=""/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="soapui-setings.xml Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="CI_TestCase_001_50x"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="drivingLicence" type="wsdl" bindingName="{http://www.websigni.org/drivingLicence/}drivingLicenceSOAP" soapVersion="1_1" anonymous="optional" definition="file:/C:/piglets/source/piglets-examples/stateless-driving-licence-ws-test-harness/drivingLicence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl"><con:part><con:url>file:\C:\piglets\source\piglets-examples\stateless-driving-licence-ws-test-harness\drivingLicence.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="drivingLicence" targetNamespace="http://www.websigni.org/drivingLicence/" xmlns:drlc="http://www.websigni.org/drivingLicence/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
     <xsd:schema targetNamespace="http://www.websigni.org/drivingLicence/">
       <xsd:element name="SubmitDrivingLicenceApplication">
@@ -174,7 +204,59 @@
          </application>
       </driv:SubmitDrivingLicenceApplication>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="9997" path="/statelessDrivingLicenceMockService" host="WN7X64-3NNHM4J" name="drivingLicenceMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="SubmitDrivingLicenceApplication" interface="drivingLicence" operation="SubmitDrivingLicenceApplication"><con:settings/><con:dispatchPath>log.info "Dispatch request"
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="CI_TestSuit_001"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CI_TestCase_001_50x" searchProperties="true" id="8e346030-1b23-4c49-8b84-3a2ee95a415d"><con:settings/><con:testStep type="request" name="TestStep1_TC_501_accepted"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>drivingLicence</con:interface><con:operation>SubmitDrivingLicenceApplication</con:operation><con:request name="TestStep1_TC_501_accepted" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9997/statelessDrivingLicenceMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>TC_501</messageId>
+         <applicant>
+            <identificationNumber>501</identificationNumber>
+            <name>Angelica</name>
+            <surname>Turle</surname>
+            <age>28</age>
+         </applicant>
+         <application>
+            <number>501001</number>
+            <submissionDate>20120715</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestStep2_TC_502_applicant_rejected"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>drivingLicence</con:interface><con:operation>SubmitDrivingLicenceApplication</con:operation><con:request name="TestStep2_TC_502_applicant_rejected" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9997/statelessDrivingLicenceMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>TC_502</messageId>
+         <applicant>
+            <identificationNumber>502</identificationNumber>
+            <name>Robert</name>
+            <surname>Robert</surname>
+            <age>10</age>
+         </applicant>
+         <application>
+            <number>502001</number>
+            <submissionDate>20120809</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestStep3_TC_503_application_rejected"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>drivingLicence</con:interface><con:operation>SubmitDrivingLicenceApplication</con:operation><con:request name="TestStep3_TC_503_application_rejected" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9997/statelessDrivingLicenceMockService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://www.websigni.org/drivingLicence/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:SubmitDrivingLicenceApplication>
+         <messageId>TC_503</messageId>
+         <applicant>
+            <identificationNumber>503</identificationNumber>
+            <name>Marcin</name>
+            <surname>Tracye</surname>
+            <age>31</age>
+         </applicant>
+         <application>
+            <number>503001</number>
+            <submissionDate>20110301</submissionDate>
+         </application>
+      </driv:SubmitDrivingLicenceApplication>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.websigni.org/drivingLicence/SubmitDrivingLicenceApplication"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC_502_applicant_rejected" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="9997" path="/statelessDrivingLicenceMockService" host="WN7X64-3NNHM4J" name="drivingLicenceMockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="SubmitDrivingLicenceApplication" interface="drivingLicence" operation="SubmitDrivingLicenceApplication"><con:settings/><con:dispatchPath>// debug
+log.info "Dispatch request"
 
 // imports
 import com.eviware.soapui.support.XmlHolder
@@ -188,7 +270,7 @@ def holder = new XmlHolder( mockRequest.requestContent )
 
 // set namespaces
 holder.namespaces["driv"] = "http://www.websigni.org/drivingLicence/"
- 
+
 // get request fields
 def messageId = holder["//messageId"]
 def identificationNumber = holder["//identificationNumber"]
@@ -199,6 +281,9 @@ try { age = Integer.parseInt(holder["//age"]) } catch(e) { } //ignore
 def applicationNumber = holder["//number"]
 def submissionDate
 try { submissionDate = new SimpleDateFormat("yyyyMMdd").parse(holder["//submissionDate"]) } catch(e) { } // ignore
+
+// debug
+log.info "messageid: ${messageId}"
 
 // response variables
 def responseName = "TC_999_default"
