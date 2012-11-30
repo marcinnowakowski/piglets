@@ -16,10 +16,9 @@
 
   <dependencies>
 	<dependency>
-		<groupId>commons-lang</groupId>
-		<artifactId>commons-lang</artifactId>
-		<version>2.4</version>
-		<scope>provided</scope>
+		<groupId>org.websigni.piglets</groupId>
+		<artifactId>stateless-driving-licence</artifactId>
+		<version>${project.version}</version>
 	</dependency>
   </dependencies>
 
